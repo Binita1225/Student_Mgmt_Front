@@ -16,7 +16,7 @@ const Login = ({ onLogin }) => {
         "https://localhost:7108/api/User/login",
         { UserName: username, Password: password }
       );
-      const token = response.data.Token;
+      const token = response.data.token;
       const userRole = response.data.Role;
       localStorage.setItem("token", token);
       localStorage.setItem("userRole", userRole);
@@ -27,6 +27,15 @@ const Login = ({ onLogin }) => {
       setError("Login failed. Please check your credentials.");
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const userData = { UserName: "JohnDoe", Role: "Student" }; // Replace with API response
+
+  //   onLogin(userData); // Update parent state
+  //   navigate("/"); // Redirect after login
+  // };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
