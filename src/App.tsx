@@ -13,16 +13,15 @@ import Program from "./pages/Program";
 const App = () => {
   const [user, setUser] = useState<string | null>(null);
 
-  // Check localStorage for saved user data
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      try {
+    try {
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
         const userData = JSON.parse(storedUserData);
-        setUser(userData.UserName); // Set username from user data
-      } catch (error) {
-        console.error("Error parsing userData:", error);
+        setUser(userData.UserName);
       }
+    } catch (error) {
+      console.error("Error parsing userData:", error);
     }
   }, []);
 

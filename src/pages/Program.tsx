@@ -9,6 +9,7 @@ const Program = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log("Program component mounted");
     loadPrograms();
   }, []);
 
@@ -17,6 +18,7 @@ const Program = () => {
       const data = await getProgram();
       setPrograms(data);
     } catch (error) {
+      console.error("Error fetching programs", error);
       setError(`Error loading programs: ${error.message}`);
     }
   };
@@ -33,6 +35,11 @@ const Program = () => {
   };
 
   const openModal = (program = null) => {
+    setSelectedProgram(program);
+    setIsModalOpen(true);
+  };
+
+  const handleEditProgram = (program) => {
     setSelectedProgram(program);
     setIsModalOpen(true);
   };
@@ -71,7 +78,7 @@ const Program = () => {
                 <td className="px-6 py-4">{program.programName}</td>
                 <td className="px-6 py-4 flex space-x-3">
                   <button
-                    onClick={() => openModal(program)}
+                    onClick={() => handleEditProgram(program)}
                     className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300"
                   >
                     Edit

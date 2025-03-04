@@ -32,6 +32,7 @@ const ProgramForm = ({ program, onClose }) => {
     const fetchFaculties = async () => {
       try {
         const response = await getFaculty();
+        console.log("Faculties fetched:", response);
         setFaculties(response);
       } catch (error) {
         console.error("Error fetching faculties", error);
@@ -61,13 +62,22 @@ const ProgramForm = ({ program, onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { programId, ...data } = formData; // Remove programId if it's null
+    const { programId, ...data } = formData; 
     const formDataToSubmit = programId ? formData : data;
 
     try {
-      await addProgram(formDataToSubmit);
-      console.log("Program saved successfully!");
-      navigate("/program");
+ 
+
+      if (programId) {
+        await updateProgram(programId, formDataToSubmit);
+        console.log("Program updated successfully!");
+      } else {
+        await addProgram(formDataToSubmit);
+        console.log("Program added successfully!");
+      }
+
+      onClose();
+      navigate("/program", { replace: true });
     } catch (error) {
       console.error("Error saving program", error);
       if (error.response) {
@@ -75,26 +85,6 @@ const ProgramForm = ({ program, onClose }) => {
       }
     }
   };
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   const formDataToSubmit = {
-  //     programId: formData.programId,
-  //     programName: formData.programName,
-  //     facultyId: formData.facultyId,
-  //     durationInYears: formData.durationInYears,
-  //     description: formData.description,
-  //     isActive: formData.isActive,
-  //   };
-
-  //   try {
-  //     await addProgram(formDataToSubmit);
-  //     console.log("Program saved successfully!");
-  //   } catch (error) {
-  //     console.error("Error saving program", error);
-  //   }
-  // };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -104,7 +94,6 @@ const ProgramForm = ({ program, onClose }) => {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Program Name */}
           <div className="mb-4">
             <label htmlFor="programName" className="block text-gray-700">
               Program Name
@@ -120,7 +109,6 @@ const ProgramForm = ({ program, onClose }) => {
             />
           </div>
 
-          {/* Faculty Dropdown */}
           <div className="mb-4">
             <label htmlFor="facultyId" className="block text-gray-700">
               Faculty
@@ -142,7 +130,6 @@ const ProgramForm = ({ program, onClose }) => {
             </select>
           </div>
 
-          {/* Duration in Years */}
           <div className="mb-4">
             <label htmlFor="durationInYears" className="block text-gray-700">
               Duration (Years)
@@ -158,7 +145,6 @@ const ProgramForm = ({ program, onClose }) => {
             />
           </div>
 
-          {/* Description */}
           <div className="mb-4">
             <label htmlFor="description" className="block text-gray-700">
               Description
@@ -173,7 +159,6 @@ const ProgramForm = ({ program, onClose }) => {
             ></textarea>
           </div>
 
-          {/* Active Status */}
           <div className="mb-4 flex items-center">
             <input
               type="checkbox"
