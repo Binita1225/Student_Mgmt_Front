@@ -9,6 +9,9 @@ import SideBar from "./components/Menu/SideBar";
 import Layout from "./components/Menu/Layout";
 import PrivateRoute from "./routes/PrivateRoute";
 import Program from "./pages/Program";
+import StudentList from "./pages/StudentList";
+import StudentDetails from "./pages/StudentDetail";
+import StudentForm from "./pages/StudentForm";
 
 const App = () => {
   const [user, setUser] = useState<string | null>(null);
@@ -57,6 +60,11 @@ const App = () => {
               // {/* </PrivateRoute> */}
             }
           />
+          <Route path="/students" element={<StudentList />} />
+          <Route path="/students/add" element={<StudentForm />} />
+          <Route path="/students/edit/:id" element={<StudentForm />} />
+          <Route path="/students/:id" element={<StudentDetails />} />
+
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
