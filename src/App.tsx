@@ -86,7 +86,14 @@ const App = () => {
   return (
     <Layout username={user?.UserName} onLogout={logout}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
 
         {/* Protect these routes */}
         <Route

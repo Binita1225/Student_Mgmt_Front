@@ -51,12 +51,12 @@ const Program = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-semibold text-gray-800">Program List</h1>
+        <h1 className="text-2xl font-bold">Program List</h1>
         <button
           onClick={() => openModal()}
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+          className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-900 transition duration-300"
         >
           Add Program
         </button>
@@ -64,7 +64,7 @@ const Program = () => {
 
       <div className="overflow-x-auto bg-white shadow-md rounded-lg">
         <table className="min-w-full text-left table-auto">
-          <thead className="bg-blue-600 text-white">
+          <thead className="bg-gray-800 text-white">
             <tr>
               <th className="px-6 py-3">ID</th>
               <th className="px-6 py-3">Program Name</th>
@@ -79,13 +79,13 @@ const Program = () => {
                 <td className="px-6 py-4 flex space-x-3">
                   <button
                     onClick={() => handleEditProgram(program)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300"
+                    className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition duration-300"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(program.programId)}
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300"
+                    className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition duration-300"
                   >
                     Delete
                   </button>

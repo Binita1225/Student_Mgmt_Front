@@ -62,12 +62,10 @@ const ProgramForm = ({ program, onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { programId, ...data } = formData; 
+    const { programId, ...data } = formData;
     const formDataToSubmit = programId ? formData : data;
 
     try {
- 
-
       if (programId) {
         await updateProgram(programId, formDataToSubmit);
         console.log("Program updated successfully!");
@@ -177,13 +175,13 @@ const ProgramForm = ({ program, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400"
+              className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-900"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+              className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-900"
             >
               {program ? "Save Changes" : "Add Program"}
             </button>

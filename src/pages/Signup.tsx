@@ -103,7 +103,7 @@
 
 import { useState } from "react";
 import { registerUser } from "../services/authServices";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -132,52 +132,57 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 shadow-lg rounded-lg"
-      >
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        <input
-          type="text"
-          name="FullName"
-          onChange={handleChange}
-          placeholder="Full Name"
-          className="w-full p-2 border rounded mb-3"
-          required
-        />
-        <input
-          type="text"
-          name="UserName"
-          onChange={handleChange}
-          placeholder="Username"
-          className="w-full p-2 border rounded mb-3"
-          required
-        />
-        <input
-          type="email"
-          name="Email"
-          onChange={handleChange}
-          placeholder="Email"
-          className="w-full p-2 border rounded mb-3"
-          required
-        />
-        <input
-          type="password"
-          name="PasswordHash"
-          onChange={handleChange}
-          placeholder="Password"
-          className="w-full p-2 border rounded mb-3"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-green-500 text-white px-4 py-2 rounded w-full"
-        >
-          Register
-        </button>
-      </form>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 shadow-md rounded-lg max-w-md w-full text-center">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Sign Up</h2>
+        {error && <p className="text-red-500 mb-3">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="FullName"
+            onChange={handleChange}
+            placeholder="Full Name"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="UserName"
+            onChange={handleChange}
+            placeholder="Username"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+          <input
+            type="email"
+            name="Email"
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+          <input
+            type="password"
+            name="PasswordHash"
+            onChange={handleChange}
+            placeholder="Password"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-6 py-3 rounded-lg w-full hover:bg-green-600 transition duration-300"
+          >
+            Register
+          </button>
+        </form>
+        <p className="mt-4 text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="text-green-500 font-semibold">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

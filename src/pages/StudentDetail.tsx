@@ -108,7 +108,7 @@ const StudentDetails = () => {
       <div className="mt-6 text-center">
         <Link
           to="/students"
-          className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          className="inline-block px-4 py-2 bg-gray-700 text-white rounded-md  hover:bg-gray-900 transition"
         >
           Back to List
         </Link>
@@ -117,7 +117,7 @@ const StudentDetails = () => {
   );
 };
 
-// Reusable component for detail items
+
 const DetailItem = ({ label, value }: { label: string; value: string }) => (
   <p className="text-gray-700">
     <strong className="font-semibold text-gray-900">{label}:</strong>{" "}

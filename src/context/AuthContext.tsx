@@ -27,7 +27,7 @@
 //   );
 // };
 
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface AuthContextType {
   user: any;
@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (userData: any) => {
     setUser(userData);
     localStorage.setItem("userData", JSON.stringify(userData));
+    localStorage.setItem("token", userData.token);
   };
 
   const logout = () => {
@@ -51,6 +52,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("userData");
     localStorage.removeItem("token");
   };
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, login, logout }}>

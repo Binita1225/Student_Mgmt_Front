@@ -3,6 +3,7 @@ import {
   addStudent,
   updateStudent,
   getStudentById,
+  getAllPrograms,
 } from "../services/StudentServives";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -23,35 +24,58 @@ const StudentForm = () => {
     programId: "",
   });
 
+  const [programs, setPrograms] = useState([]);
+
   useEffect(() => {
+    fetchPrograms();
     if (id) {
       fetchStudent();
     }
   }, [id]);
 
-  const fetchStudent = async () => {
-    const data = await getStudentById(id);
+  const fetchPrograms = async () => {
+    try {
+      const programsData = await getAllPrograms();
+      console.log("Fetched Programs:", programsData);
+      setPrograms(programsData);
+    } catch (error) {
+      console.error("Error fetching programs:", error);
+    }
+  };
 
-    setStudent(data);
+  const fetchStudent = async () => {
+    try {
+      const data = await getStudentById(id);
+      console.log("Fetched Student:", data);
+      setStudent({
+        ...data,
+        programId: data.programId?.toString() || "",
+      });
+    } catch (error) {
+      console.error("Error fetching student", error);
+    }
   };
 
   const handleChange = (e) => {
-    setStudent({ ...student, [e.target.name]: e.target.value });
+    // setStudent({ ...student, [e.target.name]: e.target.value });
+
+    setStudent({
+      ...student,
+      [e.target.name]:
+        e.target.name === "programId" ? e.target.value : e.target.value,
+    });
+    console.log("Fetched Programs:", programs);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const genderEnumValue =
-      student.gender === "Male" ? 0 : student.gender === "Female" ? 1 : 2; 
-
-
-    const convertedProgramId = Number(student.programId);
-
+      student.gender === "Male" ? 0 : student.gender === "Female" ? 1 : 2;
 
     const payload = {
       ...student,
-      programId: convertedProgramId,
+      programId: Number(student.programId),
       gender: genderEnumValue,
     };
 
@@ -77,6 +101,7 @@ const StudentForm = () => {
       } else {
         await addStudent(payload);
       }
+
       navigate("/students");
     } catch (error: any) {
       console.error("Error submitting the student form:", error);
@@ -84,6 +109,10 @@ const StudentForm = () => {
         console.error("API Error Details:", error.response.data);
       }
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/students");
   };
 
   return (
@@ -210,7 +239,7 @@ const StudentForm = () => {
             className="border p-2 w-full"
           />
         </div>
-        <div>
+        {/* <div>
           <label>Program ID:</label>
           <input
             type="number"
@@ -221,13 +250,42 @@ const StudentForm = () => {
             required
             className="border p-2 w-full"
           />
+        </div> */}
+
+        <div>
+          <label>Program:</label>
+          <select
+            name="programId"
+            value={student.programId}
+            onChange={handleChange}
+            required
+            className="border p-2 w-full"
+          >
+            <option value="">Select a Program</option>
+            {programs.map((program) => (
+              <option key={program.programId} value={program.programId}>
+                {program.programName || "Unknown Program"}
+              </option>
+            ))}
+          </select>
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          {id ? "Update" : "Add"} Student
-        </button>
+
+        <div className="flex justify-end space-x-3">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-900"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="bg-gray-700 text-white rounded-md  hover:bg-gray-900"
+          >
+            {id ? "Update" : "Add"} Student
+          </button>
+        </div>
       </form>
     </div>
   );

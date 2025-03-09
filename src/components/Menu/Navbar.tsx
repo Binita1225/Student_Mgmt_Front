@@ -132,7 +132,7 @@
 
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { logoutUser } from "../../services/authServices";
+// import { logoutUser } from "../../services/authServices";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -142,12 +142,12 @@ const Navbar = () => {
     return <div>Loading...</div>;
   }
 
-  const { user, setUser } = auth;
+  const { user, logout } = auth;
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logoutUser();
-    setUser(null);
+    logout();
+    // setUser(null);
     navigate("/login");
   };
 
@@ -155,7 +155,7 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-4 text-white flex justify-between">
       <Link to="" className="text-xl"></Link>
       <div>
-        {user ? (
+        {user && (
           <>
             <span className="mr-4">{user.UserName}</span>
             <button
@@ -164,15 +164,6 @@ const Navbar = () => {
             >
               Logout
             </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="mr-4">
-              Login
-            </Link>
-            <Link to="/signup" className="bg-blue-500 px-4 py-2 rounded">
-              Signup
-            </Link>
           </>
         )}
       </div>

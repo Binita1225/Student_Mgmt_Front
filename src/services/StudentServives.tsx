@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "https://localhost:7108/api/Student";
+const PROGRAMS_API_URL = "https://localhost:7108/api/Program";
 
 export const getAllStudents = async () => {
   const response = await axios.get(API_URL);
@@ -24,5 +25,10 @@ export const updateStudent = async (id: any, student: any) => {
 
 export const deleteStudent = async (id: any) => {
   const response = await axios.delete(`${API_URL}/${id}`);
+  return response.data;
+};
+
+export const getAllPrograms = async () => {
+  const response = await axios.get(PROGRAMS_API_URL);
   return response.data;
 };
