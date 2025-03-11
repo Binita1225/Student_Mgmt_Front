@@ -40,6 +40,12 @@ const SideBar = () => {
               <li className="px-4 py-2 hover:bg-gray-700">
                 <Link to="/all-info">Student Info</Link>
               </li>
+              <li className="px-4 py-2 hover:bg-gray-700">
+                <Link to="/semWise-info">SemWise Report</Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700">
+                <Link to="/YearWise-info">YearWise Report</Link>
+              </li>
 
               <li className="px-4 py-2 hover:bg-gray-700">
                 <Link to="/report-enroll">Enroll Student</Link>

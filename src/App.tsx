@@ -15,6 +15,8 @@ import StudentForm from "./pages/StudentForm";
 import AuthContext from "./context/AuthContext";
 import EnrollReport from "./pages/EnrollReport";
 import StudentAllInfo from "./pages/StudentAllInfo";
+import SemWiseReport from "./pages/SemWiseReport";
+import YearWiseReport from "./pages/YearWiseReport";
 
 // const App = () => {
 //   const [user, setUser] = useState<string | null>(null);
@@ -152,6 +154,24 @@ const App = () => {
           element={
             <PrivateRoute>
               <StudentAllInfo />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/semWise-info"
+          element={
+            <PrivateRoute>
+              <SemWiseReport />
+            </PrivateRoute>
+          }
+        />
+
+<Route
+          path="/YearWise-info"
+          element={
+            <PrivateRoute>
+              <YearWiseReport />
             </PrivateRoute>
           }
         />
