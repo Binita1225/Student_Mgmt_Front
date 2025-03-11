@@ -7,7 +7,7 @@ export const getFaculty = async () => {
   return response.data;
 };
 
-export const addFaculty = async (facultyData) => {
+export const addFaculty = async (facultyData: any) => {
   console.log("Sending data:", facultyData);
   const response = await axios.post(API_URL, facultyData);
   return response.data;

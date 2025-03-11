@@ -11,9 +11,12 @@ const ProgramForm = ({ program, onClose }) => {
     durationInYears: 0,
     description: "",
     isActive: true,
+    programType: "",
   });
 
   const [faculties, setFaculties] = useState([]);
+
+  const programTypes = ["Semester", "Yearly"];
 
   const navigate = useNavigate();
 
@@ -26,6 +29,7 @@ const ProgramForm = ({ program, onClose }) => {
         durationInYears: program.durationInYears,
         description: program.description,
         isActive: program.isActive,
+        programType: program.programType,
       });
     }
 
@@ -53,6 +57,8 @@ const ProgramForm = ({ program, onClose }) => {
       [name]:
         name === "facultyId"
           ? Number(value)
+          : name === "programType"
+          ? value
           : type === "checkbox"
           ? checked
           : value,
@@ -155,6 +161,27 @@ const ProgramForm = ({ program, onClose }) => {
               className="w-full p-2 border border-gray-300 rounded-md"
               required
             ></textarea>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="programType" className="block text-gray-700">
+              Program Type
+            </label>
+            <select
+              id="programType"
+              name="programType"
+              value={formData.programType}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded-md"
+              required
+            >
+              <option value="">Select Program Type</option>
+              {programTypes.map((type, index) => (
+                <option key={index} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="mb-4 flex items-center">

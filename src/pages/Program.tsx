@@ -76,6 +76,7 @@ const Program = () => {
               <tr key={program.programId} className="border-b hover:bg-gray-50">
                 <td className="px-6 py-4">{program.programId}</td>
                 <td className="px-6 py-4">{program.programName}</td>
+
                 <td className="px-6 py-4 flex space-x-3">
                   <button
                     onClick={() => handleEditProgram(program)}

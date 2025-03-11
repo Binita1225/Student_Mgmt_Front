@@ -13,6 +13,8 @@ import StudentList from "./pages/StudentList";
 import StudentDetails from "./pages/StudentDetail";
 import StudentForm from "./pages/StudentForm";
 import AuthContext from "./context/AuthContext";
+import EnrollReport from "./pages/EnrollReport";
+import StudentAllInfo from "./pages/StudentAllInfo";
 
 // const App = () => {
 //   const [user, setUser] = useState<string | null>(null);
@@ -144,6 +146,17 @@ const App = () => {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/all-info"
+          element={
+            <PrivateRoute>
+              <StudentAllInfo />
+            </PrivateRoute>
+          }
+        />
+
+        <Route path="/report-enroll" element={<EnrollReport />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
