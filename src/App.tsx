@@ -17,66 +17,7 @@ import EnrollReport from "./pages/EnrollReport";
 import StudentAllInfo from "./pages/StudentAllInfo";
 import SemWiseReport from "./pages/SemWiseReport";
 import YearWiseReport from "./pages/YearWiseReport";
-
-// const App = () => {
-//   const [user, setUser] = useState<string | null>(null);
-
-//   useEffect(() => {
-//     try {
-//       const storedUserData = localStorage.getItem("userData");
-//       if (storedUserData) {
-//         const userData = JSON.parse(storedUserData);
-//         setUser(userData.UserName);
-//       }
-//     } catch (error) {
-//       console.error("Error parsing userData:", error);
-//     }
-//   }, []);
-
-//   const handleLogin = (user: any) => {
-//     setUser(user.UserName); // Save username after login
-//     localStorage.setItem("userData", JSON.stringify(user)); // Save user data to localStorage
-//   };
-
-//   const handleLogout = () => {
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("userData");
-//     setUser(null); // Clear the user data
-//   };
-
-//   return (
-//     <>
-//       <Layout username={user} onLogout={handleLogout}>
-//         <Routes>
-//           <Route path="/" element={<Home />} />
-//           <Route
-//             path="/faculty"
-//             element={
-//               // <PrivateRoute>
-//               <Faculty />
-//               // {/* </PrivateRoute> */}
-//             }
-//           />
-//           <Route
-//             path="/program"
-//             element={
-//               // <PrivateRoute>
-//               <Program />
-//               // {/* </PrivateRoute> */}
-//             }
-//           />
-//           <Route path="/students" element={<StudentList />} />
-//           <Route path="/students/add" element={<StudentForm />} />
-//           <Route path="/students/edit/:id" element={<StudentForm />} />
-//           <Route path="/students/:id" element={<StudentDetails />} />
-
-//           <Route path="/login" element={<Login onLogin={handleLogin} />} />
-//           <Route path="/signup" element={<Signup />} />
-//         </Routes>
-//       </Layout>
-//     </>
-//   );
-// };
+import EnrollProgramList from "./pages/EnrollProgramList";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -167,7 +108,7 @@ const App = () => {
           }
         />
 
-<Route
+        <Route
           path="/YearWise-info"
           element={
             <PrivateRoute>
@@ -176,7 +117,14 @@ const App = () => {
           }
         />
 
-        <Route path="/report-enroll" element={<EnrollReport />} />
+        <Route
+          path="/report-enroll/:programId"
+          element={
+            <PrivateRoute>
+              <EnrollReport programId={undefined} />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

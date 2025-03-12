@@ -48,7 +48,7 @@ const SideBar = () => {
               </li>
 
               <li className="px-4 py-2 hover:bg-gray-700">
-                <Link to="/report-enroll">Enroll Student</Link>
+                <Link to="/report-enroll/:programId">Enroll Student</Link>
               </li>
             </ul>
           )}
